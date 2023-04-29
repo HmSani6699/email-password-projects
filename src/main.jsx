@@ -11,6 +11,7 @@ import Login from './Login/Login';
 import Register from './Register/Register';
 import RegisterRBs from './RegisterRBs/RegisterRBs';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import RegisterBs from './RegisterBs/RegisterBs';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path:'/register-rbs',
         element:<RegisterRBs></RegisterRBs>
+      },
+      {
+        path:'/register-bs',
+        element:<RegisterBs></RegisterBs>
       }
     ]
   },
