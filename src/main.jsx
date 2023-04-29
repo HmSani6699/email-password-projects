@@ -9,6 +9,8 @@ import Main from './Layout/Main';
 import Home from './component/Home/Home';
 import Login from './Login/Login';
 import Register from './Register/Register';
+import RegisterRBs from './RegisterRBs/RegisterRBs';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +28,10 @@ const router = createBrowserRouter([
       {
         path:'/register',
         element:<Register></Register>
+      },
+      {
+        path:'/register-rbs',
+        element:<RegisterRBs></RegisterRBs>
       }
     ]
   },
