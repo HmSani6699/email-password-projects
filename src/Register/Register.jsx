@@ -19,6 +19,12 @@ const Register = () => {
         const password=event.target.password.value;
         console.log(email,password);
 
+        //validation
+        if(!/(?=.*?[A-Z])/.test(password)){
+            setError('Please add at least one Uppercase');
+            return
+        }
+
         // creat user in fb
         createUserWithEmailAndPassword(auth,email,password)
         .then(result=>{
