@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from '../Firebase/Firebase.config';
 
 const Register = () => {
+    const [error,setError]=useState('');
+    const [success,setSuccess]=useState('')
 
     const auth=getAuth(app)
 
     const handleSubmit = (event) => {
+
+        setSuccess('')
         // prevent page refresh
         event.preventDefault();
 
@@ -20,21 +24,26 @@ const Register = () => {
         .then(result=>{
             const loggedUser=result.user;
             console.log(loggedUser);
+            setError('')
+            setSuccess('Successfull login')
         })
         .catch(error=>{
             console.log(error);
+            setError(error.message)
         })
     }
     return (
         <div>
             <h2 className='mt-3 mb-3 text-center'>Please Register</h2>
             <form onSubmit={handleSubmit}>
-                <input className='mb-3 w-100 rounded-lg ps-2' type="email" name="email" id="email" placeholder='Your Email' />
+                <input className='mb-3 w-100 rounded-lg ps-2' type="email" name="email" id="email" placeholder='Your Email' required />
                 <br /> 
-                <input className='mb-3 w-100 roundet-lg ps-2' type="password" name="password" id="password" placeholder='Your Password' />
+                <input className='mb-3 w-100 roundet-lg ps-2' type="password" name="password" id="password" placeholder='Your Password' required />
                 <br /> 
                 <input className='btn btn-primary' type="submit" value="Register" />
             </form>
+            <p className='text-danger'>{error}</p>
+            <p className='text-success'>{success}</p>
         </div>
     );
 };
