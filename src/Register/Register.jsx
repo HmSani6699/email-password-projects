@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [error,setError]=useState('');
-    const [success,setSuccess]=useState('')
+    const [success,setSuccess]=useState('');
+    const [password,showPassword] =useState('password')
 
     const auth=getAuth(app)
 
@@ -72,6 +73,10 @@ const Register = () => {
         })
     }
 
+    const handleShowPassword=()=>{
+        showPassword('text')
+    }
+
     return (
         <div>
             <h2 className='mt-3 mb-3 text-center'>Please Register</h2>
@@ -80,8 +85,10 @@ const Register = () => {
                 <br /> 
                 <input className='mb-3 w-100 rounded-lg ps-2' type="email" name="email" id="email" placeholder='Your Email' required />
                 <br /> 
-                <input className='mb-3 w-100 roundet-lg ps-2' type="password" name="password" id="password" placeholder='Your Password' required />
+                <input className='mb-3 w-100 roundet-lg ps-2' type={password} name="password" id="password" placeholder='Your Password' required />
                 <br /> 
+                <button onClick={handleShowPassword}>Show password</button>
+                <br />
                 <input className='btn btn-primary' type="submit" value="Register" />
             </form>
             <p>Please login <Link to='/login'>Login</Link></p>
