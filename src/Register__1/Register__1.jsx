@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
 import app from '../Firebase/Firebase.config';
 import { Link } from 'react-router-dom';
 
 const Register__1 = () => {
-    const [error,setError] =useState('')
-    const [success,setSuccess] =useState('')
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
     const auth = getAuth(app);
 
 
@@ -24,17 +24,34 @@ const Register__1 = () => {
         }
 
         createUserWithEmailAndPassword(auth, email, password)
-        .then(result=>{
-            const loggedUser=result.user;
-            console.log(loggedUser);
-            setError('');
-            setSuccess('Successfull Register')
-        })
-        .catch(error=>{
-            console.log(error);
-            setError(error.message)
-        })
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                setError('');
+                setSuccess('Successfull Register');
+                handleVerificationEmail(result.user);
+                handleUpdateProfile(result.user, name)
+            })
+            .catch(error => {
+                console.log(error);
+                setError(error.message)
+            })
 
+    }
+
+    // verify your email
+    const handleVerificationEmail = (user) => {
+        sendEmailVerification(user)
+            .then(result => {
+                console.log(result);
+            })
+    }
+
+    // update profilr
+    const handleUpdateProfile = (user, name) => {
+        updateProfile(user, {
+            displayName:name,
+        })
     }
     return (
         <div>
