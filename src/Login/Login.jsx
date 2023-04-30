@@ -14,12 +14,24 @@ const Login = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
 
+        // signInWithEmailAndPassword(auth, email, password)
+        //     .then(result => {
+        //         const loggedUser = result.user;
+        //         console.log(loggedUser);
+        //         setError('')
+        //         setSuccess('Success full login')
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //         setError(error.message)
+        //     })
+
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                setError('')
-                setSuccess('Success full login')
+                setSuccess('Successfull login');
+                setError('');
             })
             .catch(error => {
                 console.log(error);
@@ -27,14 +39,33 @@ const Login = () => {
             })
     }
 
-    const handleResetBtn = ()=> {
+    // const handleResetBtn = () => {
+    //     const email = emailReset.current.value;
+    //     if(!email===''){
+    //         alert('Please enter your email')
+    //     }
+    //     sendPasswordResetEmail(auth, email)
+    //         .then(() => {
+    //             alert('Please check your email')
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }
+
+    const handleResetBtn = () => {
         const email = emailReset.current.value;
+        if (!email) {
+            alert('Please enter your email');
+            return;
+        }
         sendPasswordResetEmail(auth,email)
-        .then(()=>{
-            alert('Please check your email')
+        .then(result=>{
+            console.log(result);
         })
         .catch(error=>{
-            console.log(error);
+            console.log(error.message);
+            setError(error.message)
         })
     }
     return (
