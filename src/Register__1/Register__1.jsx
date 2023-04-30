@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from '../Firebase/Firebase.config';
+import { Link } from 'react-router-dom';
 
 const Register__1 = () => {
     const [error,setError] =useState('')
@@ -46,6 +47,7 @@ const Register__1 = () => {
                 <input className='mb-3 w-100 rounded-4 p-2 ps-2' type='password' name="password" id="password" placeholder='Your Password' required />
                 <br />
                 <input className='btn btn-primary' type="submit" value="Register" />
+                <p>Please login ?<Link to='/login__1'>Login_-_1</Link></p>
             </form>
             <p className='text-danger'>{error}</p>
             <p className='text-success'>{success}</p>
