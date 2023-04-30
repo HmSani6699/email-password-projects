@@ -3,6 +3,12 @@
 * 2. add onsubmit to the form
 * 3. creat form firebase projects
 * 4. set to auth 
+* 5. creat provider 
+* 6. enaval to password and email authentication
+* 7. (register === signUp) create to createUserWithEmailAndPassword
+* 8. (login === sign in) signInWithEmailAndPassword
+*
+*
 *
 *
 **/ 

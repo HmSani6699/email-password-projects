@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from '../Firebase/Firebase.config';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [error,setError]=useState('');
@@ -48,6 +49,7 @@ const Register = () => {
                 <br /> 
                 <input className='btn btn-primary' type="submit" value="Register" />
             </form>
+            <p>Please login <Link to='/login'>Login</Link></p>
             <p className='text-danger'>{error}</p>
             <p className='text-success'>{success}</p>
         </div>
