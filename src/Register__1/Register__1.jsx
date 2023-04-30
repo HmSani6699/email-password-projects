@@ -1,24 +1,39 @@
-import React from 'react';
-import { getAuth } from "firebase/auth";
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import app from '../Firebase/Firebase.config';
 
 const Register__1 = () => {
+    const [error,setError] =useState('')
+    const [success,setSuccess] =useState('')
     const auth = getAuth(app);
 
-    const handleFormSubmit = (event) => {
-        event.preventDefault();
-        const getForm=event.target;
-        const name =getForm.name.value;
-        const email =getForm.email.value;
-        const password =getForm.password.value;
-        console.log(name,email,password);
 
-        if(!/(?=.*?[0-9])/.test(password)){
+    const handleFormSubmit = (event) => {
+        setSuccess('')
+        event.preventDefault();
+        const getForm = event.target;
+        const name = getForm.name.value;
+        const email = getForm.email.value;
+        const password = getForm.password.value;
+        console.log(name, email, password);
+
+        if (!/(?=.*?[0-9])/.test(password)) {
             alert('Please added at list one degit number');
             return
         }
 
-        
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(result=>{
+            const loggedUser=result.user;
+            console.log(loggedUser);
+            setError('');
+            setSuccess('Successfull Register')
+        })
+        .catch(error=>{
+            console.log(error);
+            setError(error.message)
+        })
+
     }
     return (
         <div>
@@ -32,6 +47,8 @@ const Register__1 = () => {
                 <br />
                 <input className='btn btn-primary' type="submit" value="Register" />
             </form>
+            <p className='text-danger'>{error}</p>
+            <p className='text-success'>{success}</p>
         </div>
     );
 };
