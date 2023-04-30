@@ -7,8 +7,8 @@
 * 6. enaval to password and email authentication
 * 7. (register === signUp) create to createUserWithEmailAndPassword
 * 8. (login === sign in) signInWithEmailAndPassword
-*
-*
+* 9. verify the emaill for [visit] (go to docs > build > authentication > web > Manage user >      sent a user a verification email)
+* 10. import senVerificationEmail and sendEmailVerification(currentUser)
 *
 *
 **/ 

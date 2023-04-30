@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
 import app from '../Firebase/Firebase.config';
 import { Link } from 'react-router-dom';
 
@@ -31,14 +31,26 @@ const Register = () => {
         .then(result=>{
             const loggedUser=result.user;
             console.log(loggedUser);
-            setError('')
-            setSuccess('Successfull login')
+            setError('');
+            event.target.reset()
+            setSuccess('Successfull login');
+            sentVerifacationEmail(result.user)
         })
         .catch(error=>{
             console.log(error);
             setError(error.message)
         })
     }
+
+    const sentVerifacationEmail =(user)=>{
+        console.log(user);
+        sendEmailVerification(user)
+        .then(result=>{
+            console.log(result)
+            alert('please verify your email')
+        })
+    }
+
     return (
         <div>
             <h2 className='mt-3 mb-3 text-center'>Please Register</h2>
